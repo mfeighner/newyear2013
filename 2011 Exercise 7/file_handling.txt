@@ -1,0 +1,48 @@
+#!/usr/local/bin/perl
+#
+# Program to open the password file, read it in,
+# print it, add line numbers but ignore blank lines
+# and close it again.
+
+$file = 'file.txt';		# Name the file
+$n = 0;
+open(INFO, $file);		# Open the file
+print "\n";
+print $file;
+print (":\n\n");
+seek (INFO,0,0);
+#$pattern = "/[a-zA-Z]+/";
+#$pattern = "/(.)\1/";
+#$pattern = "([:alnum:])\1";
+#$pattern = "(\\w)\\2+";
+
+while ($line = <INFO>)
+{ 
+   chomp $line;
+#  s/(.)\g1/$1/g; 
+   if ($line =~ /aa|ee|ff|gg|ll|mm|nn|oo|pp|rr|ss|tt/)
+   { 
+      $_ = $line;
+      $n++;
+
+      for my $i (reverse 1 .. length $line) 
+      { 
+         if (substr($line, $i, 1) eq substr($line, $i - 1, 1)) 
+         { 
+             substr($line, $i - 1, 2) = '(' . substr($line, $i - 1, 2) . ')'; 
+         } 
+      } 
+ 
+      print "$n). $line\n";   
+   } 
+}
+
+close (INFO);
+
+print "\nThere are ($n) lines in the file '$file'.\n"; 
+
+
+
+
+    
+

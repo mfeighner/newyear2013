@@ -1,0 +1,86 @@
+#!/usr/local/bin/perl
+#
+# Program to open the password file, read it in,
+# print it, add line numbers but ignore blank lines
+# and close it again.
+
+$file = 'truth.txt';		# Name the file
+$n = 0;
+open(INFO, $file);		# Open the file
+print "\n";
+print $file;
+print (":\n\n");
+seek (INFO,0,0);
+#$pattern = "/[a-zA-Z]+/";
+#$pattern = "/(.)\1/";
+#$pattern = "([:alnum:])\1";
+#$pattern = "(\\w)\\2+";
+
+while (<INFO>)
+{ 
+# Good practice to store $_ value because 
+# subsequent operations may change it. 
+my($line) = $_; 
+$text = "@lines"; 
+# Good practice to always strip the trailing 
+# newline from the line. 
+chomp($line); 
+# Convert the line to upper case. 
+#$line =~ tr/[a-z]/[A-Z]/; 
+# Print the line to the screen and add a newline 
+print "$line\n"; 
+}
+@personal = split(/:/, $text);
+print @personal;
+
+@lines = split(/:/);
+print "nothing happend\n";
+print @lines;
+print "nothing happend\n";
+
+@lines = ("discovered (this is the truth) that when he",
+"t kinds of metal to the leg of a frog, an e",
+"rrent developed and the frog's leg kicked,",
+"longer attached to the frog, which was dea",
+"normous advances in the field of amphibian",
+"ch it hop back into the pond -- almost.  Bu",
+"ond -- almost.  But the greatest Electrical",
+"ectrical Pioneer of them all was Thomas Edi");
+
+
+chop $lines;
+print @lines;
+
+
+
+
+while ($line = <INFO>)
+{ 
+   chomp $line;
+#  s/(.)\g1/$1/g; 
+   if ($line =~ /aa|ee|ff|gg|ll|mm|nn|oo|pp|rr|ss|tt/)
+   { 
+      $_ = $line;
+      $n++;
+
+      for my $i (reverse 1 .. length $line) 
+      { 
+         if (substr($line, $i, 1) eq substr($line, $i - 1, 1)) 
+         { 
+             substr($line, $i - 1, 2) = '(' . substr($line, $i - 1, 2) . ')'; 
+         } 
+      } 
+ 
+      print "$n). $line\n";   
+   } 
+}
+
+close (INFO);
+
+print "\nThere are ($n) lines in the file '$file'.\n"; 
+
+
+
+
+    
+
