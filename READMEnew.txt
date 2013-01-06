@@ -1,1 +1,1 @@
-If you are still ahving problems, you did not read the readme.
+If you are still having problems, you did not read the readme.
